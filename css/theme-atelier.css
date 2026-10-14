@@ -1,0 +1,185 @@
+/* ============================================================
+   AMOUR JEWELS — THEME "ATELIER"
+   ------------------------------------------------------------
+   The single theme layer for the whole site. Loaded AFTER
+   css/style.css (and after css/admin.css on admin.html), so it is
+   the last word on palette, type stacks and geometry.
+
+   TYPE
+     --serif   Fraunces  — variable display serif, opsz 9–144,
+                           wght 300–700, true italics. Used for
+                           headlines, prices in editorial contexts,
+                           quotations and the wordmark.
+     --sans    Karla     — variable grotesque, wght 200–800. Used
+                           for body copy, UI, labels and numerals.
+
+   PALETTE   Butter yellow · warm ink · antique gold · bridal wine.
+             The ground of every page is butter. Hierarchy comes
+             from saturation steps of the same yellow rather than
+             from white-vs-colour panels — which is exactly what
+             block-printed cotton and khadi do. Antique gold on
+             butter with a deep maroon accent is what Indian
+             heirloom jewellery looks like under light.
+
+   GEOMETRY  --r is 2px: surfaces are near-square, edges are
+             hairlines, elevation comes from rules rather than
+             soft shadows. Genuine pills (badges, dots, avatars)
+             keep --r-pill.
+
+   No palette switcher — this is the only theme.
+   ============================================================ */
+
+:root{
+  /* — surfaces — white + #84afd0 family ———————————————
+     white      page ground · highlight fills
+     mist #eff6fa  raised · cards, drawers, panels, sticky header
+     ice #dcebf3   soft tint · inputs, hover fills
+     powder #c2dbe8 recessed · section bands, page banners, admin
+     #84afd0       deepest · media placeholders, tracks, tint bars */
+  --champagne:#ffffff;    /* page ground — pure white */
+  --cream:#eff6fa;        /* raised — cards, drawers, panels, inputs */
+  --ivory:#dcebf3;        /* soft #84afd0 tint */
+  --cha--champagne:#ffffff;    /* alias (legacy typo name) */
+  --cre--cream:#eff6fa;        /* alias (legacy typo name) */
+  --sand:#c2dbe8;         /* recessed — bands, banners, admin ground */
+  --linen:#84afd0;        /* deepest — #84afd0 — media placeholders, bars */
+  /* RGB triplets for translucent chrome + light-on-ink accents */
+  --champagne-rgb:255,255,255;
+  /* translucent chrome triplets — kept in step with the surfaces above so the
+     sticky header, hero card and wishlist button stay white/blue */
+  --ivory-rgb:220,235,243;
+  --cream-rgb:239,246,250;
+
+  /* — ink (cool navy so it sits on white/blue) — */
+  --espresso:#0e2a3d;     /* headings, dark surfaces */
+  --espresso-2:#0a1f2e;   /* hover on dark */
+  --cocoa:#334e61;        /* body copy */
+  --taupe:#5d7d92;        /* secondary copy */
+  --stone:#7d9cb1;        /* tertiary · disabled · placeholders */
+
+  /* — #84afd0 (your blue — labels must clear AA on white) — */
+  --gold:#84afd0;
+  --gold-deep:#3f728e;    /* kickers, micro-labels */
+  --gold-soft:#b7d6e5;    /* #84afd0 tint on dark surfaces */
+
+  /* — dusty-blue accent: sale, wishlist, badges — */
+  --wine:#4e8aa6;
+  --wine-deep:#35687f;
+
+  /* — rules & elevation (cool #84afd0 hairlines on white) — */
+  --line:rgba(63,114,142,.20);
+  --line-soft:rgba(63,114,142,.10);
+  --line-gold:rgba(132,175,208,.50);
+  --shadow:0 26px 60px -40px rgba(63,114,142,.25);
+
+  /* — type stacks — */
+  --serif:'Fraunces',ui-serif,Georgia,'Times New Roman',serif;
+  --sans:'Karla',system-ui,-apple-system,'Segoe UI',sans-serif;
+
+  /* — geometry — */
+  --r:2px;
+  --r-pill:99px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --container:1320px;
+
+  /* — status — */
+  --success:#2e7d4f;
+  --fail:#c0392b;
+  --fail-line:rgba(192,57,43,.4);
+  --fail-tint:rgba(192,57,43,.07);
+  --warn:#8a6d1a;
+  --refresh:#84afd0;      /* #84afd0 live accents */
+}
+
+/* ============================================================
+   TYPOGRAPHY DETAIL
+   Small caps-ish kerning for labels, real optical sizing for the
+   serif, and lining figures anywhere a total is printed.
+   ============================================================ */
+body{
+  font-family:var(--sans);font-weight:400;
+  font-optical-sizing:auto;
+  font-kerning:normal;
+  font-variant-ligatures:common-ligatures;
+  letter-spacing:.005em;
+}
+h1,h2,h3,h4,.h-display,.h-1,.h-2,.h-3,.f-logo,.m-logo,.ig-id,.about-quote blockquote,
+.testi blockquote,.value b,.stat b,.ed-num,.acct-welcome{
+  font-family:var(--serif);
+  font-optical-sizing:auto;
+}
+.h-display,.h-1,.h-2,.about-quote blockquote{font-weight:400}
+.about-quote blockquote em,.footer-news h3 em,.split .copy .sig{font-style:italic;font-weight:300}
+.stat b,.kpi b,.sum-row.total,.pdp-price .now{font-variant-numeric:lining-nums tabular-nums}
+input,select,textarea,button{font-family:var(--sans)}
+.inv,.inv *{font-family:var(--sans)}
+.inv h1,.inv .f-logo{font-family:var(--serif)}
+
+/* ============================================================
+   PAPER GRAIN
+   A 4%-opacity fractal-noise film over the whole page. Invisible
+   as a "texture", but it kills the flat vector look that makes a
+   site read as a template — the same trick print scans use.
+   ============================================================ */
+body::after{
+  content:'';position:fixed;inset:0;z-index:400;pointer-events:none;
+  opacity:.04;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+
+/* ============================================================
+   PALETTE-DRIVEN RETINTS
+   style.css / admin.css carry a few literal colours that bypass
+   the token layer. Re-pointing them here means the whole site —
+   storefront and console — follows the palette above. Specificity
+   is unchanged, so these win purely because this file loads last.
+   ============================================================ */
+
+/* The translucent chrome — sticky header, hero card, wishlist button — and the
+   hero dots / kicker rules now read from --ivory-rgb and --cream-rgb in
+   style.css, so they follow the butter ground on their own and need no retint
+   here. Only the genuine colour correction is left: style.css ships a cool
+   #f4f4f3 for the hero kicker, which is warmed below. */
+.hero-copy .kicker{color:rgba(var(--champagne-rgb),.92)}
+::selection{background:var(--gold-soft);color:var(--espresso)}
+
+/* admin — KPI deltas & status chips */
+.kpi em{color:var(--success)}
+.kpi em.neg{color:var(--fail)}
+.chip.ok{color:var(--success);border-color:var(--success)}
+.chip.warn{color:var(--warn);border-color:var(--warn)}
+.chip.bad{color:var(--fail);border-color:var(--fail)}
+.adm-side .brand span{color:var(--gold-soft)}
+.adm-nav button.active{border-left-color:var(--gold-soft)}
+.adm-ava{background:var(--espresso);color:var(--cream)}
+
+/* ============================================================
+   WHITE + BABY BLUE OVERRIDES
+   Any literal warm/yellow/gold/maroon left in style.css,
+   admin.css or inline page <style> blocks is re-pointed here
+   to white / baby blue. This file loads last, so these win.
+   ============================================================ */
+
+/* — hard dark grounds (footer, hero card, gift card, drawers) → baby-blue ink — */
+.site-footer,.footer-bottom,.gc-card,.hero-card,.hero-media .hero-card{
+  background:var(--espresso) !important;
+  color:#fff !important;
+}
+/* — light warm grounds → white / pale blue — */
+.page-banner,.split.alt,.value-grid,.ed-card,.shop-filters,.filters,
+body[style*="--ivory"]{background:var(--cream) !important;}
+.adm-body{background:#edf3f8 !important;}
+.adm-login .bento,.adm-card,.kpi,.bento,.auth-box{background:#fff !important;}
+.adm-code,.adm-alert{background:var(--cream) !important;}
+.bars i{background:var(--linen) !important;}
+.bars i.hot{background:var(--gold-deep) !important;}
+.donut::after{background:#fff !important;}
+/* — gold buttons → baby blue gradient — */
+.btn.gold,.btn.dark,.btn.wide.dark{
+  background:linear-gradient(135deg,var(--gold),var(--gold-deep)) !important;
+  border-color:var(--gold-deep) !important;color:#fff !important;}
+.btn.ghost{border-color:rgba(132,175,208,.55) !important;color:var(--gold-deep) !important;}
+/* — stars, prices, accents → baby blue — */
+.p-stars,.adm-stars{color:var(--gold) !important;}
+.pdp-price .save,.p-card .off{color:var(--wine) !important;}
+.kicker,.sec-head .kicker{color:var(--gold-deep) !important;}
